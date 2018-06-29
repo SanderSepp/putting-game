@@ -14,7 +14,7 @@ class TotalScore extends React.Component {
                             Total score
                         </Typography>
                         <Typography variant="display1" type="number" gutterBottom>
-                            {this.props.score}
+                            0
                         </Typography>
                     </Paper>
                 </Grid>

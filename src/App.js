@@ -1,43 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
-import InsertScore from "./components/InsertScore";
+import AddScore from "./components/AddScore";
 import TotalScore from "./components/TotalScore";
+import ScoreList from "./components/ScoreList";
 
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            currentScore: '',
-            totalScore: 0,
-        }
-    }
-
-    addScore = () => {
-        this.setState({
-            totalScore: parseInt(this.state.totalScore) + parseInt(this.state.currentScore),
-            currentScore: '',
-        });
-    };
-
-    updateScore = (e) => {
-        this.setState({
-            currentScore: e.target.value,
-        });
-    };
 
     render() {
         return (
             <div>
-                <NavBar/>
-                <TotalScore
-                    score={this.state.totalScore}
-                />
-                <InsertScore
-                    currentScore={this.state.currentScore}
-                    addScore={this.addScore}
-                    updateScore={this.updateScore}
-                />
+                <NavBar />
+                <TotalScore />
+                <AddScore />
+                <ScoreList />
             </div>
         );
     }
