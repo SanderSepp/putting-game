@@ -7,17 +7,21 @@ const ScoreList = ({ scores }) => {
     return (
         <div>
             {
-                scores.map((score, index) => (
-                    <Score key={index} score={score} />
-                ))
+                scores.map((score, index) => {
+                    console.log("Score" + score);
+                    return <Score key={index} score={score} />
+                })
             }
         </div>
     )
 };
 
-const mapStateToProps = state => ({
-    scores: state.scores
-});
+const mapStateToProps = state => {
+    return {
+        scores: state.currentScores,
+    }
+};
+
 
 export default connect(
     mapStateToProps

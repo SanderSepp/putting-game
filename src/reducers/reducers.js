@@ -1,23 +1,44 @@
 import { combineReducers } from 'redux';
-import {ADD_SCORE} from "../actions/actions";
+import { ADD_SCORE, UPDATE_TOTAL_SCORE, UPDATE_METERS } from "../actions/actions";
 
-function scores(state = [], action) {
+function totalScore(state = 0, action) {
+    switch (action.type) {
+        case UPDATE_TOTAL_SCORE:
+            return state + parseInt(action.currentScore);
+        default:
+            return state;
+    }
+}
+
+function meters(state = 10, action) {
+    switch (action.type) {
+        case UPDATE_METERS:
+            return action.meters;
+        default:
+            return state;
+    }
+}
+
+function currentScores(state = [], action) {
     switch (action.type) {
         case ADD_SCORE:
             return [
                 ...state,
                 {
-                    score: action.score,
+                    score: action.currentScore,
                     id: action.id,
+                    meters: action.currentMeters,
                 }
             ];
         default:
-            return state
+            return state;
     }
 }
 
-const scoresApp = combineReducers({
-    scores
+const puttingApp = combineReducers({
+    totalScore,
+    meters,
+    currentScores
 });
 
-export default scoresApp;
+export default puttingApp;

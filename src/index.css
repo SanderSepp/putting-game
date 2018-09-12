@@ -11,3 +11,7 @@ body {
 .grid__paper {
   padding: 12px;
 }
+
+.button__margin {
+  margin-top: 12px !important;
+}

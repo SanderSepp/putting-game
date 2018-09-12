@@ -3,14 +3,16 @@ import Grid from '@material-ui/core/es/Grid/Grid';
 import Paper from '@material-ui/core/es/Paper/Paper';
 import TextField from '@material-ui/core/es/TextField/TextField';
 import Button from '@material-ui/core/es/Button/Button';
-import { addScore } from "../actions/actions";
+import { addScore, updateMeters, updateTotalScore } from "../actions/actions";
 import { connect } from "react-redux";
+import { calcMeters} from "../scripts/global";
 
 class AddScore extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentScore: ''
+            currentScore: '',
+            currentMeters: 10,
         }
     }
 
@@ -22,9 +24,21 @@ class AddScore extends React.Component {
 
     add = () => {
         const { dispatch } = this.props;
-        dispatch(addScore(this.state.currentScore));
+        const { currentScore, currentMeters } = this.state;
+        const newMeters = calcMeters(this.state.currentScore);
+        const roundScore = currentScore * currentMeters;
+        dispatch(addScore(currentScore, currentMeters));
+        dispatch(updateTotalScore(roundScore));
+        dispatch(updateMeters(newMeters));
+        this.calcNewMeters(newMeters);
         this.resetCurrentScore();
     };
+
+    calcNewMeters(meters) {
+        this.setState({
+            currentMeters: meters,
+        });
+    }
 
     resetCurrentScore = () => {
         this.setState({
@@ -47,6 +61,7 @@ class AddScore extends React.Component {
                         <Button
                             variant="contained"
                             color="primary"
+                            className="button__margin"
                             onClick={this.add}
                         >
                             Submit

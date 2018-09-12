@@ -5,7 +5,8 @@ const Score = ({ score }) => {
     return (
         <Paper className="grid__paper">
             Round {score.id}<br/>
-            Connected putts {score.score}
+            Connected putts {score.score}<br/>
+            Meters {score.meters}
         </Paper>
     );
 };
